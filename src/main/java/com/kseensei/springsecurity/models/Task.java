@@ -11,8 +11,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity(name = "task")
-@Getter(AccessLevel.PUBLIC)
-@Setter(AccessLevel.PUBLIC)
+@Getter(value = AccessLevel.PUBLIC)
+@Setter(value = AccessLevel.PUBLIC)
 public class Task {
 
     @Id
