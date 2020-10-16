@@ -1,8 +1,12 @@
 package com.kseensei.springsecurity.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.constraints.Null;
+
 import com.kseensei.springsecurity.models.Task;
+import com.kseensei.springsecurity.models.dtos.GeneralResponse;
 import com.kseensei.springsecurity.models.dtos.TaskRequest;
 import com.kseensei.springsecurity.services.TaskService;
 
@@ -21,32 +25,54 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping(path = "/task")
-    public void createTask(TaskRequest taskRequest) {
+    public GeneralResponse<Null> createTask(TaskRequest taskRequest) {
 
         taskService.createTask(taskRequest);
+
+        LocalDateTime time = LocalDateTime.now().plusHours(3);
+
+        GeneralResponse<Null> gen = new GeneralResponse<Null>(time, "Success", 200, null);
+
+        return gen;
 
     }
 
     @GetMapping(path = "/task")
-    public List<Task> getTasks() {
+    public GeneralResponse<List<Task>> getTasks() {
 
         List<Task> findAll = taskService.getTasks();
 
-        return findAll;
+        LocalDateTime time = LocalDateTime.now().plusHours(3);
+
+        GeneralResponse<List<Task>> gen = new GeneralResponse<List<Task>>(time, "Success", 200, findAll);
+
+        return gen;
 
     }
 
     @PutMapping(path = "/task")
-    public void updateTask(Long id, @RequestBody TaskRequest taskRequest) {
+    public GeneralResponse<Null> updateTask(Long id, @RequestBody TaskRequest taskRequest) {
 
         taskService.updateTask(id, taskRequest);
+
+        LocalDateTime time = LocalDateTime.now().plusHours(3);
+
+        GeneralResponse<Null> gen = new GeneralResponse<Null>(time, "Success", 200, null);
+
+        return gen;
 
     }
 
     @DeleteMapping(path = "/task")
-    public void deleteTask(Long id) {
+    public GeneralResponse<Null> deleteTask(Long id) {
 
         taskService.deleteTask(id);
+
+        LocalDateTime time = LocalDateTime.now().plusHours(3);
+
+        GeneralResponse<Null> gen = new GeneralResponse<Null>(time, "Success", 200, null);
+
+        return gen;
 
     }
 
